@@ -1,0 +1,10 @@
+{
+    "name": "ivko/yii-wkhtmltopdf",
+    "description": "wkhtmltopdf integration",
+    "authors": [
+        {
+            "name": "IvKo"
+        }
+    ],
+    "minimum-stability": "dev"
+}
