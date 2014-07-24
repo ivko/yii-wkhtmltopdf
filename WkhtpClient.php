@@ -6,7 +6,7 @@ class WkhtpClient extends Wkhtmltopdf {
     
     private $url = null;
 
-    public function __construct($tmpDir, $url = 'http://em.globalcom.bg/pdf.php')
+    public function __construct($tmpDir, $url = null)
 	{
         parent::__construct($tmpDir);
         $this->url = $url;
