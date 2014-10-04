@@ -1,0 +1,5 @@
+<?
+
+class WkhtpException extends Exception {
+    
+}

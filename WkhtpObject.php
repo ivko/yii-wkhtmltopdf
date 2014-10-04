@@ -12,7 +12,7 @@ class WkhtpObject {
         } elseif (property_exists($class, $name)) {
 			return $this->$name;
         } else {
-            throw new Apex_Exception("Cannot read a class '$class' property without name.");
+            throw new WkhtpException("Cannot read a class '$class' property without name.");
         }
 	}
 
@@ -25,7 +25,7 @@ class WkhtpObject {
         } elseif (property_exists($class, $name)) {
 			$this->$name = $value;
         } else {
-            throw new Apex_Exception("Cannot read a class '$class' property without name.");
+            throw new WkhtpException("Cannot read a class '$class' property without name.");
         }
 	}
     

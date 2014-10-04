@@ -7,11 +7,11 @@ class WkhtpServer extends Wkhtmltopdf {
         if (!isset($args['pages'])) {
             return false;
         }
-        if ($args['header']) {
+        if (isset($args['header'])) {
             $this->getHeader()->setVars($args['header']);
             unset($args['header']);
         }
-        if ($args['footer']) {
+        if (isset($args['footer'])) {
             $this->getFooter()->setVars($args['footer']);
             unset($args['footer']);
         }

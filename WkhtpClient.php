@@ -76,7 +76,7 @@ class WkhtpClient extends Wkhtmltopdf {
 		stream_get_contents($this->pipes[1]); // wait for process
 		$error = stream_get_contents($this->pipes[2]);
         if ($this->response === false) {
-			throw new Apex_Exception($error);
+			throw new WkhtpException($error);
 		}
         fclose($this->pipes[1]);
         fclose($this->pipes[2]);

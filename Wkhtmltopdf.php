@@ -163,7 +163,7 @@ class Wkhtmltopdf extends WkhtpObject
     public function headersTransfer($filename, $length)
     {
         if (headers_sent()) {
-            throw new Apex_Exception("Headers already sent");
+            throw new WkhtpException("Headers already sent");
         }
         header("Content-Description: File Transfer");
         header("Cache-Control: public; must-revalidate, max-age=0");
@@ -182,7 +182,7 @@ class Wkhtmltopdf extends WkhtpObject
     public function headersEmbed($filename, $length)
 	{
         if (headers_sent()) {
-            throw new Apex_Exception("Headers already sent");
+            throw new WkhtpException("Headers already sent");
         }
         header("Content-type: application/pdf");
         header("Cache-control: public, must-revalidate, max-age=0");
@@ -194,7 +194,7 @@ class Wkhtmltopdf extends WkhtpObject
     }
 	/**
 	 * Send headers and outputs PDF document to browser.
-	 * @throws Apex_Exception
+	 * @throws WkhtpException
 	 */
 	public function send($filename = 'file.pdf', $embed = false)
 	{
@@ -221,7 +221,7 @@ class Wkhtmltopdf extends WkhtpObject
 	/**
 	 * Save PDF document to file.
 	 * @param  string
-	 * @throws Apex_Exception
+	 * @throws WkhtpException
 	 */
 	public function save($file)
 	{
@@ -255,7 +255,7 @@ class Wkhtmltopdf extends WkhtpObject
 		}
 
 		if (self::$executable === FALSE) {
-			throw new Apex_Exception('Cannot found Wkhtmltopdf executable');
+			throw new WkhtpException('Cannot found Wkhtmltopdf executable');
 		}
 
 		$m = $this->margin;
@@ -289,7 +289,8 @@ class Wkhtmltopdf extends WkhtpObject
 	 */
 	protected function detectExecutable()
 	{
-        $path = realpath( dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Wkhtmltopdf' . DIRECTORY_SEPARATOR . 'bin');
+        $path = realpath( dirname(__FILE__) . DIRECTORY_SEPARATOR . 'bin');
+
 		foreach (self::$executables as $exec) {
             $exec = $path . DIRECTORY_SEPARATOR . $exec;
 			if (proc_close($this->openProcess("$exec -v", $tmp)) === 1) {
@@ -313,10 +314,14 @@ class Wkhtmltopdf extends WkhtpObject
 		stream_get_contents($this->pipes[1]); // wait for process
 		$error = stream_get_contents($this->pipes[2]);
 		if (proc_close($this->p) > 0) {
-			throw new Apex_Exception($error);
+			throw new WkhtpException($error);
 		}
 		foreach ($this->tmpFiles as $file) {
 			unlink($file);
 		}
 	}
+    
+    public function getPages() {
+        return $this->pages;
+    }
 }
